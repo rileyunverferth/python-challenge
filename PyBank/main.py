@@ -15,25 +15,26 @@ increase = 0
 decrease = 0
 
 # read file
-with open(csvpath, encoding='utf-8') as csvfile:
-    csvreader = csv.reader(csvfile, delimiter="'")
+with open(csvpath) as csvfile:
+    csvreader = csv.reader(csvfile, delimiter=",")
 
     csv_header = next(csvreader)
 
     # store data in lists
     for row in csvreader:
         months.append(row[0])
-        total_months = len(months)
         profits_losses.append(row[1])
-        total_profit = sum(profits_losses)
 
         # take values for greatest increase and decrease
-        if int(row[1]) > increase:
+        if row[1] > increase:
             row = increase
             increase_month = row[0]
         if int(row[1]) < decrease:
             row = decrease
             decrease_month = row[0]
+
+total_months = len(months)
+total_profit = sum(profits_losses)
 
 print("Financial Analysis")
 print("----------------------------")
